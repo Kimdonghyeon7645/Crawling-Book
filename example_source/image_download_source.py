@@ -1,5 +1,4 @@
 import requests
-# -*- coding: utf-8 -*-  / 한글 인코딩 주석
 
 url = '' # 실제 이미지 링크 주소
 referer_url = "" # 이미지를 가져온 사이트 주소
