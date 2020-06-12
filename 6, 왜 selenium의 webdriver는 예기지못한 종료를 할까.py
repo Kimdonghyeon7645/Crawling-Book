@@ -2,7 +2,7 @@
 from selenium import webdriver
 import time
 
-head_url = 'https://nozomi.la/tag/shota-'
+head_url = 'https://pixabay.com/images/search/korea/?pagi='
 urls = []
 htmls = []
 for i in range(1,31):
