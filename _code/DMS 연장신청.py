@@ -2,6 +2,8 @@
 from selenium import webdriver
 from time import sleep
 
+id_ = ''
+pw_ = ''
 choice = {
     '가온실': 1,
     '나온실': 2,
@@ -32,8 +34,8 @@ nav_path = '//*[@id="meal"]/div/header/nav/'
 browser.find_element_by_xpath(nav_path + 'button').click()
 sleep(1)
 form_path = '//*[@id="root"]/div[1]/div/div[2]/div[1]/'
-browser.find_element_by_xpath(form_path + 'input[1]').send_keys('kkddhh7645')
-browser.find_element_by_xpath(form_path + 'input[2]').send_keys('kkddhh77887788')
+browser.find_element_by_xpath(form_path + 'input[1]').send_keys(id_)
+browser.find_element_by_xpath(form_path + 'input[2]').send_keys(pw_)
 browser.find_element_by_xpath(form_path + 'button').click()
 sleep(1)
 try:
