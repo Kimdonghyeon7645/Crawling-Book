@@ -2,7 +2,7 @@
 from selenium import webdriver
 from time import sleep
 
-id_ = 'kkddhh7645'
+id_ = ''
 pw_ = ''
 choice = {
     '가온실': 1,
