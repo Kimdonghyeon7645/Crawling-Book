@@ -4,8 +4,9 @@ import requests
 import time
 
 
-def filter_tag(level : int):
+def filter_tag(level: int):
     """ 총 검색 기록에서 level1, python3 필터 추가 """
+    print("검색 필터 적용중...", sep="\n")
     time.sleep(2)
     driver.find_element_by_xpath(f"""//*[@id="collapseFilterLevel"]/li[{level}]/label""").click()  # level 필터 클릭
     driver.find_element_by_xpath("""//*[@id="collapseFilterLanguage"]/li[9]/label""").click()  # python3 필터 클릭
@@ -18,7 +19,7 @@ def get_pages():
     return driver.find_elements_by_xpath("""//*[@id="tab_all_challenges"]/section/div/div[2]/div[2]/div[2]/nav/ul/li""")
 
 
-def get_questions():
+def get_questions_url():
     """ html 텍스트를 받아서, 원하는 질문 링크를 리스트로 반환 """
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     question_list.extend([a_tag['href'] for a_tag in
@@ -26,10 +27,10 @@ def get_questions():
                                       "> div.algorithm-list > div.row > div > div > a") if a_tag['href']])
 
 
-def get_all_questions():
+def get_all_questions_url():
     """ 모든 페이지의 질문 링크를 반환 """
     print(f"첫 페이지 크롤링... ", end='\t')
-    get_questions()
+    get_questions_url()
     page_li = get_pages()
     max_page = int(page_li[-2].text)
     print("완료")
@@ -40,7 +41,7 @@ def get_all_questions():
             if str(page) == ele.text:
                 ele.click()
                 time.sleep(1)
-                get_questions()
+                get_questions_url()
                 break
         page_li = get_pages()
         print("완료")
@@ -55,7 +56,7 @@ def get_question_content(q_url : str):
     print(f"문제 '{title}' 다운로드 완료")
 
 
-def get_all_question_content():
+def get_all_questions_content():
     count = 0
     for q in question_list:
         get_question_content(header_url + q)
@@ -77,9 +78,9 @@ if __name__ == '__main__':
     driver.get(url)
 
     # 함수 순서대로 실행
-    filter_tag(level=1)
-    get_all_questions()
-    get_all_question_content()
+    filter_tag(level=2)
+    get_all_questions_url()
+    get_all_questions_content()
 
     # 셀레니움 종료
     driver.close()
