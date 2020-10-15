@@ -56,22 +56,31 @@ def get_question_content(q_url):
     print(f"문제 '{title}' 다운로드 완료")
 
 
-if __name__ == '__main__':
-    header_url = "https://programmers.co.kr/"
-    url = "https://programmers.co.kr/learn/challenges?tab=all_challenges"  # 프로그래머스 알고리즘 url
-    PATH = "C:/Users/user/Downloads/알고리즘_문제/"
-    question_list = []
-
-    option = webdriver.ChromeOptions()
-    option.add_argument('headless')
-    driver = webdriver.Chrome(r"C:\Users\user\Documents\chromedriver.exe", options=option)
-    driver.get(url)
-    filter_tag()
-    get_all_questions()
-
+def get_all_question_content():
     count = 0
     for q in question_list:
         get_question_content(header_url + q)
         count += 1
     print(f"총 {count}건의 문제가 파일로 저장되었습니다. 프로그램을 정상 종료합니다...")
+
+
+if __name__ == '__main__':
+    # 변수 초기화
+    header_url = "https://programmers.co.kr/"
+    url = "https://programmers.co.kr/learn/challenges?tab=all_challenges"
+    PATH = "C:/Users/user/Downloads/알고리즘_문제/"
+    question_list = []
+
+    # 셀레니움 크롬 드라이버 실행
+    option = webdriver.ChromeOptions()
+    option.add_argument('headless')
+    driver = webdriver.Chrome(r"C:\Users\user\Documents\chromedriver.exe", options=option)
+    driver.get(url)
+
+    # 함수 순서대로 실행
+    filter_tag()
+    get_all_questions()
+    get_all_question_content()
+
+    # 셀레니움 종료
     driver.close()
