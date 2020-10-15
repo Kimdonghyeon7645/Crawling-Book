@@ -4,11 +4,10 @@ import requests
 import time
 
 
-def filter_tag():
+def filter_tag(level : int):
     """ 총 검색 기록에서 level1, python3 필터 추가 """
-    print("검색 필터 적용중 ...", end="\t")
     time.sleep(2)
-    driver.find_element_by_xpath("""//*[@id="collapseFilterLevel"]/li[1]/label""").click()  # level1 필터 클릭
+    driver.find_element_by_xpath(f"""//*[@id="collapseFilterLevel"]/li[{level}]/label""").click()  # level 필터 클릭
     driver.find_element_by_xpath("""//*[@id="collapseFilterLanguage"]/li[9]/label""").click()  # python3 필터 클릭
     print("완료")
     time.sleep(3)
@@ -47,7 +46,7 @@ def get_all_questions():
         print("완료")
 
 
-def get_question_content(q_url):
+def get_question_content(q_url : str):
     html = BeautifulSoup(requests.get(q_url).text, 'html.parser')
     title = html.select_one("#tab > li").text.split('\n')[1].strip().replace('?', '')
     with open(PATH + title + ".md", "wt", encoding="utf-8") as f:
@@ -78,7 +77,7 @@ if __name__ == '__main__':
     driver.get(url)
 
     # 함수 순서대로 실행
-    filter_tag()
+    filter_tag(level=1)
     get_all_questions()
     get_all_question_content()
 
