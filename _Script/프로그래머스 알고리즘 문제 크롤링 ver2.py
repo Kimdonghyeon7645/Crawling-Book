@@ -52,9 +52,8 @@ def get_question_content(q_url: str) -> int:
     html = BeautifulSoup(requests.get(q_url).text, 'html.parser')
     title = html.select_one("#tab > li").text.split('\n')[1].strip().replace('?', '')
     if check_solved and title in check_li:
-        print(f"{title} 문제는 이미 푼 문제입니다!")
         return 0
-    with open(PATH + title + ".md", "wt", encoding="utf-8") as f:
+    with open(path + title + ".md", "wt", encoding="utf-8") as f:
         f.write("프로그래머스 문제 바로가기 : " + q_url + "\n")
         f.write(str(html.select_one("#tour2")))
     print(f"문제 '{title}' 다운로드 완료")
@@ -78,7 +77,7 @@ if __name__ == '__main__':
     # 변수 초기화
     header_url = "https://programmers.co.kr/"
     url = "https://programmers.co.kr/learn/challenges?tab=all_challenges"
-    PATH = "C:/Users/user/Downloads/알고리즘_문제/"
+    path = "C:/Users/user/Downloads/알고리즘_문제/"
     level = 2
     mode = 1
     check_solved = True
@@ -87,7 +86,7 @@ if __name__ == '__main__':
 
     # 변수 설정
     if mode is 1:
-        PATH = input("다운로드될 파일들이 저장될 경로를 입력하세요 : ")
+        path = input("다운로드될 파일들이 저장될 경로를 입력하세요 (맨 뒤에 구분자 입력) : ")
         level = int(input("저장할 레벨을 입력하세요 : "))
         check_solved = (input("이미 푼 문제는 제외하고 다운받을까요? (y/n) : ") in ['1', 'y', 'Y', 'yes', 'Yes', "YES"])
 
