@@ -51,12 +51,18 @@ def get_all_questions_url():
 def get_question_content(q_url: str) -> int:
     html = BeautifulSoup(requests.get(q_url).text, 'html.parser')
     title = html.select_one("#tab > li").text.split('\n')[1].strip().replace('?', '')
-    if check_solved and title in check_li:
+    if os.path.isfile(path+title+".md"):
+        if check_solved and title in check_li:
+            print(f"해결한 문제 {title} 삭제 완료")
+            os.remove(path+title+".md")
         return 0
-    with open(path + title + ".md", "wt", encoding="utf-8") as f:
-        f.write("프로그래머스 문제 바로가기 : " + q_url + "\n")
-        f.write(str(html.select_one("#tour2")))
-    print(f"문제 '{title}' 다운로드 완료")
+    else:
+        if check_solved and title in check_li:
+            return 0
+        with open(path + title + ".md", "wt", encoding="utf-8") as f:
+            f.write("프로그래머스 문제 바로가기 : " + q_url + "\n")
+            f.write(str(html.select_one("#tour2")))
+        print(f"문제 '{title}' 다운로드 완료")
     return 1
 
 
