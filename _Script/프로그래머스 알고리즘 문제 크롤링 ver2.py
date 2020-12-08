@@ -55,6 +55,7 @@ def get_question_content(q_url: str) -> int:
         if check_solved and title in check_li:
             print(f"해결한 문제 '{title}' 삭제 완료")
             os.remove(path+title+".md")
+            return -1
         return 0
     else:
         if check_solved and title in check_li:
