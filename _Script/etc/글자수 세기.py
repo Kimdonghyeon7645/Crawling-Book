@@ -5,6 +5,7 @@ while True:
         if not i:
             break
         cnt += len(i)
+        print(cnt)
     except:
         break
-print(f"글자수 {cnt}글자")
+print(f"\n글자수 {cnt}글자")
