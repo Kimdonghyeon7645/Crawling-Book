@@ -17,7 +17,7 @@ options.add_argument("--disable-gpu") # gpu를 사용 안하도록 설정
 options.add_argument("lang=ko_KR") # 한국어로 실행되게 설정
 #그리고 webdriver.Chrome(경로, 옵션)에서 옵션부분에 chrome_options=(옵션 객체) 와 같이 해준다.
 
-chrome_driver_path = r"C:\Users\user\Documents\Python\chromedriver.exe"
+chrome_driver_path = r"C:\Users\user\Documents\chromedriver.exe"
 # r + 웹드라이버가 있는 경로 + chromedriver.exe 해서 경로값을 담아준다. (변수 이름 chromedriver 같이 하면 에러난다)
 driver = webdriver.Chrome(chrome_driver_path, chrome_options=options)
 # webdriver.(웹드라이버 브라우저)("(경로)") : 로 해서 웹 드라이버를 연결한다.
